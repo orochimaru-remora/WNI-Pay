@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import React from "react";
 import { Badge, Button, Card } from "react-bootstrap";
 import useStoredGames from "../../hooks/useStoredGames";
-import bannerImage from "../../img/banner.png";
+import logoImage from "../../img/logo.jpg";
 import { formatCurrency } from "../../utils";
 import "./Home.scss";
 
@@ -19,12 +19,8 @@ const Home: React.FC<IHomeProps> = ({ onGameSetup }) => {
 
   return (
     <div className="home text-center">
-      <h1 className="sr-only">Monopoly Money</h1>
-      <img src={bannerImage} className="banner" alt="Monopoly Money Banner" />
-
-      <p className="lead mt-2">
-        An easy way to manage finances in your game of monopoly from the browser.
-      </p>
+      <h1 className="sr-only">WNI Simulator</h1>
+      <img src={logoImage} className="banner mt-3" alt="WNI Simulator Logo" style={{ maxHeight: "220px", width: "auto" }} />
 
       <div className="new-join-button-wrapper mt-4">
         <Button size="lg" onClick={newGame}>

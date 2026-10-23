@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { routePaths } from "../constants";
 import BankIcon from "../img/bank.svg?react";
-import BannerImage from "../img/banner.png";
+import BannerImage from "../img/logo.jpg";
 import FundsIcon from "../img/funds.svg?react";
 import ListIcon from "../img/list.svg?react";
 import SettingsIcon from "../img/settings.svg?react";
@@ -59,9 +59,9 @@ const Navigation: React.FC<INavigationProps> = ({ inGame, isBanker }) => {
         <Navbar.Brand onClick={goTo("/")} className="mr-1">
           <img
             src={BannerImage}
-            height="30"
+            height="35"
             className="d-inline-block align-top"
-            alt="Monopoly Money Banner Logo"
+            alt="WNI Simulator Logo"
             style={{ cursor: "pointer" }}
           />
         </Navbar.Brand>
