@@ -4,10 +4,6 @@ import React from "react";
 import { Badge, Button, Card } from "react-bootstrap";
 import useStoredGames from "../../hooks/useStoredGames";
 import bannerImage from "../../img/banner.png";
-import Screenshot1Image from "../../img/screenshots/screenshot-1.png";
-import Screenshot2Image from "../../img/screenshots/screenshot-2.png";
-import Screenshot3Image from "../../img/screenshots/screenshot-3.png";
-import Screenshot4Image from "../../img/screenshots/screenshot-4.png";
 import { formatCurrency } from "../../utils";
 import "./Home.scss";
 
@@ -94,43 +90,6 @@ const Home: React.FC<IHomeProps> = ({ onGameSetup }) => {
         ) : (
           <div>You have no active games</div>
         )}
-      </div>
-
-      <hr />
-
-      <div>
-        <h2>What is Monopoly Money?</h2>
-        <p>
-          Monopoly Money is a webapp that helps you keep track of your finances in a game of
-          Monopoly (or any game that uses currency).
-        </p>
-        <p>
-          Instead of using the cash that the game commonly comes with, you can play Monopoly like
-          you're playing the credit card edition, but with your phone - a much more faster way to
-          exchange money.
-        </p>
-
-        <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gridGap: 6 }}
-          className="mt-5"
-        >
-          <img src={Screenshot1Image} alt="Funds page with game id" className="w-100" />
-          <img src={Screenshot2Image} alt="Transferring funds" className="w-100" />
-          <img src={Screenshot3Image} alt="Game history" className="w-100" />
-          <img src={Screenshot4Image} alt="Bankers actions page" className="w-100" />
-        </div>
-      </div>
-
-      <hr />
-
-      <div>
-        <h2>Host it Yourself</h2>
-        <p>Monopoly Money is open source, meaning you can host your own interrupted instance.</p>
-        <p>
-          <a href="https://github.com/brentvollebregt/monopoly-money">
-            github.com/brentvollebregt/monopoly-money
-          </a>
-        </p>
       </div>
     </div>
   );
