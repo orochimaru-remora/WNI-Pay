@@ -68,11 +68,6 @@ const Home: React.FC<IHomeProps> = ({ onGameSetup }) => {
                             {player.name}: {formatCurrency(player.balance)}
                           </Badge>
                         ))}
-                      {status !== null && status.useFreeParking && (
-                        <Badge variant="warning">
-                          Free Parking: {formatCurrency(status.freeParkingBalance)}
-                        </Badge>
-                      )}
                     </div>
                     <Button
                       block

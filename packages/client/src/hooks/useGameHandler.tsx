@@ -50,9 +50,6 @@ const useGameHandler = (): {
                 {player.name}: {formatCurrency(player.balance)}
               </li>
             ))}
-            {gameState.useFreeParking && (
-              <li>Free Parking: {formatCurrency(gameState.freeParkingBalance)}</li>
-            )}
           </ul>
           <small>(Provided just in the case you need to re-create the game)</small>
         </>
