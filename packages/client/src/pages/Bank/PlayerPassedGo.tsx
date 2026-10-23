@@ -14,7 +14,7 @@ import { useModal } from "react-modal-hook";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrency } from "../../utils";
 
-const passingGoRewardValueLocalStorageKey = "passingGoRewardValue";
+const passingGoRewardValueLocalStorageKey = "playersSalaryValue";
 
 interface IPlayerPassedGoProps {
   players: IGameStatePlayer[];
@@ -26,9 +26,9 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [storedPassingGoReward, setStoredPassingGoReward] = useLocalStorage<number>(
     passingGoRewardValueLocalStorageKey,
-    2000000
+    1000000
   );
-  const [passingGoReward, setPassingGoReward] = useState<number>(storedPassingGoReward ?? 2000000);
+  const [passingGoReward, setPassingGoReward] = useState<number>(storedPassingGoReward ?? 1000000);
 
   const [updatePassingGoRewardModalValue, setUpdatePassingGoRewardModalValue] =
     useState<number>(passingGoReward);
@@ -41,7 +41,7 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
           onPointerLeaveCapture={undefined}
           placeholder={undefined}
         >
-          <Modal.Title>Update Player Passing Go Reward</Modal.Title>
+          <Modal.Title>Update Player's Salary</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <InputGroup>
@@ -98,7 +98,7 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
   return (
     <>
       <label htmlFor="player-passed-go" className="mb-1">
-        Player Passed Go ({formatCurrency(passingGoReward)})
+        Player's Salary ({formatCurrency(passingGoReward)})
       </label>
 
       <ButtonGroup className="mt-1 settings-and-player-and-submit-group">
