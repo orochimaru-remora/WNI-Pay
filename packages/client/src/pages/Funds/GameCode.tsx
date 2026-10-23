@@ -23,17 +23,29 @@ const GameCode: React.FC<IGameCodeProps> = ({ gameId, isBanker }) => {
   };
 
   return (
-    <div className="text-center">
-      <h1 onClick={gameIdClicked}>{gameId}</h1>
-      <div>
-        <small className="text-muted">
-          Tap the code above to get a QR code or copy a link to help other players join
-        </small>
+    <div className="game-code-banner card p-3 mb-3">
+      <div className="d-flex flex-wrap align-items-center justify-content-between" style={{ gap: "0.75rem" }}>
+        <div className="text-left">
+          <div className="text-muted" style={{ fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+            Game ID
+          </div>
+          <div
+            onClick={gameIdClicked}
+            style={{ fontSize: "1.65rem", fontWeight: 800, letterSpacing: "0.08em", lineHeight: 1.1, cursor: "pointer" }}
+          >
+            {gameId}
+          </div>
+          {isBanker && (
+            <small className="text-muted d-block mt-1">
+              You can hide this by closing the game in settings
+            </small>
+          )}
+        </div>
+
+        <Button variant="outline-secondary" size="sm" onClick={gameIdClicked}>
+          📲 Share / QR Code
+        </Button>
       </div>
-      {isBanker && (
-        <small className="text-muted">You can hide this by closing the game in the settings</small>
-      )}
-      <hr />
     </div>
   );
 };

@@ -54,36 +54,42 @@ const Navigation: React.FC<INavigationProps> = ({ inGame, isBanker }) => {
   const goTo = (location: string) => () => navigate(location);
 
   return (
-    <Navbar bg="light" variant="light" sticky="top" className="navigation">
-      <Container>
-        <Navbar.Brand onClick={goTo("/")} className="mr-1">
+    <Navbar bg="light" variant="light" sticky="top" className="navigation mb-3">
+      <Container className="d-flex align-items-center justify-content-between">
+        <Navbar.Brand onClick={goTo("/")} className="mr-2 py-0">
           <img
             src={BannerImage}
-            height="35"
-            className="d-inline-block align-top"
+            height="38"
+            className="d-inline-block align-top nav-logo"
             alt="WNI Simulator Logo"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", display: "block", borderRadius: "6px" }}
           />
         </Navbar.Brand>
-        <Nav className="mr-auto" style={{ overflowY: "auto" }}>
+        <Nav className="ml-auto nav-button-group" style={{ overflowY: "auto" }}>
           {navbarLinks
             .filter((link) => link.active)
             .map((link) => {
               const Icon = link.icon;
+              const isActive = currentPath === link.path;
               return (
                 <Nav.Link
                   key={link.path}
                   href="#"
                   onClick={goTo(link.path)}
-                  active={currentPath === link.path}
+                  active={isActive}
                   className="p-0"
                 >
-                  <Button variant="light" title={link.title} className="d-flex ml-1 icon-button">
+                  <Button
+                    variant={isActive ? "primary" : "light"}
+                    title={link.title}
+                    className={`d-flex align-items-center icon-button ${isActive ? "active-nav-btn" : ""}`}
+                  >
                     <Icon
                       style={{
-                        height: 25,
-                        width: 25,
-                        fill: currentPath === link.path ? "black" : "rgba(0,0,0,.65)"
+                        height: 20,
+                        width: 20,
+                        fill: isActive ? "#ffffff" : "rgba(0,0,0,.75)",
+                        display: "block"
                       }}
                     />
                     <span className="ml-1 d-none d-sm-inline">{link.title}</span>

@@ -94,69 +94,80 @@ const Settings: React.FC<ISettingsProps> = ({
   };
 
   return (
-    <div className="settings">
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Balance</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortPlayersByName(players).map((player) => (
-            <tr key={player.playerId} className="player-row">
-              <td>
-                <ConnectedStateDot connected={player.connected} />
-              </td>
-              <td>{player.name}</td>
-              <td>{formatCurrency(player.balance)}</td>
-              <td>
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  title="Rename"
-                  onClick={() => {
-                    setActioningPlayer(player);
-                    showNameChangeModal();
-                  }}
-                >
-                  <span role="img" aria-label="Rename">
-                    ✏️
-                  </span>
-                </Button>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  title="Remove"
-                  className="ml-1"
-                  onClick={() => {
-                    setActioningPlayer(player);
-                    showDeletePlayerModal();
-                  }}
-                >
-                  <span role="img" aria-label="Remove">
-                    🗑️
-                  </span>
-                </Button>
-              </td>
+    <div className="settings pb-4">
+      <div className="card p-3 mb-3">
+        <h5 className="mb-3">Players</h5>
+        <Table hover responsive size="sm" className="mb-0">
+          <thead>
+            <tr>
+              <th style={{ width: "36px" }}></th>
+              <th>Name</th>
+              <th>Balance</th>
+              <th className="text-right">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {sortPlayersByName(players).map((player) => (
+              <tr key={player.playerId} className="player-row">
+                <td className="text-center">
+                  <ConnectedStateDot connected={player.connected} />
+                </td>
+                <td className="font-weight-bold">{player.name}</td>
+                <td>{formatCurrency(player.balance)}</td>
+                <td className="text-right">
+                  <div className="d-inline-flex" style={{ gap: "0.4rem" }}>
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      title="Rename"
+                      onClick={() => {
+                        setActioningPlayer(player);
+                        showNameChangeModal();
+                      }}
+                    >
+                      <span role="img" aria-label="Rename">
+                        ✏️
+                      </span>
+                    </Button>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      title="Remove"
+                      onClick={() => {
+                        setActioningPlayer(player);
+                        showDeletePlayerModal();
+                      }}
+                    >
+                      <span role="img" aria-label="Remove">
+                        🗑️
+                      </span>
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
 
-      <Button block variant="info" onClick={toggleShowOppositionBalances}>
-        {showOppositionBalances ? "Hide" : "Show"} opposition balances
-      </Button>
+      <div className="card p-3">
+        <h5 className="mb-3">Game Controls</h5>
+        <div className="settings-actions-grid">
+          <Button block variant="info" onClick={toggleShowOppositionBalances}>
+            {showOppositionBalances ? "Hide" : "Show"} Opposition Balances
+          </Button>
 
-      <Button block variant="primary" onClick={toggleNewPlayersAllowed}>
-        {isGameOpen ? "Close" : "Open"} Game To New Players
-      </Button>
+          <Button block variant="primary" onClick={toggleNewPlayersAllowed}>
+            {isGameOpen ? "Close" : "Open"} Game To New Players
+          </Button>
+        </div>
 
-      <Button block variant="danger" onClick={() => showEndGameConfirmModal()}>
-        End Game
-      </Button>
+        <hr className="my-3" />
+
+        <Button block variant="danger" onClick={() => showEndGameConfirmModal()}>
+          End Game
+        </Button>
+      </div>
     </div>
   );
 };

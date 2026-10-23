@@ -1,14 +1,29 @@
 .history {
+  max-width: 680px;
+  margin-inline: auto;
+  padding-bottom: 1.5rem;
+
   .event {
     display: grid;
     grid-template-columns: 8px 1fr;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: clip;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 
     .event-details {
-      padding-left: 8px;
+      padding: 0.65rem 0.9rem;
 
       .top {
         display: flex;
         justify-content: space-between;
+        color: #6c757d;
+        margin-bottom: 0.15rem;
+      }
+
+      .detail {
+        font-weight: 600;
       }
     }
   }

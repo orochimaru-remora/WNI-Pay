@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useModal } from "react-modal-hook";
 import MonopolyAmountInput from "../../components/MonopolyAmountInput";
-import { trackInitialisedPlayerBalances } from "../../utils";
+import { formatCurrency, trackInitialisedPlayerBalances } from "../../utils";
 
 interface IInitialiseGameProps {
   players: IGameStatePlayer[];
@@ -42,7 +42,7 @@ const ValueModal: React.FC<IValueModalProps> = ({ submitAmount, onClose }) => {
     if (amount === null) {
       setSubmitError("Please provide an amount");
     } else if (amount <= 0) {
-      setSubmitError("You must provide sum larger than $0");
+      setSubmitError("You must provide sum larger than Rp0");
     } else {
       submitAmount(amount);
       close();
@@ -74,7 +74,31 @@ const ValueModal: React.FC<IValueModalProps> = ({ submitAmount, onClose }) => {
 
         <MonopolyAmountInput amount={amount} setAmount={setAmount} autoFocus={true} />
 
-        <Button block variant="success" className="mt-1" onClick={submit}>
+        <div className="quick-amount-group mt-3">
+          {[100000, 500000, 1000000, 2000000, 4000000].map((quickVal) => (
+            <Button
+              key={quickVal}
+              variant="outline-secondary"
+              size="sm"
+              className="quick-chip-btn"
+              onClick={() => setAmount((amount ?? 0) + quickVal)}
+            >
+              +{formatCurrency(quickVal)}
+            </Button>
+          ))}
+          {amount !== null && amount > 0 && (
+            <Button
+              variant="outline-danger"
+              size="sm"
+              className="quick-chip-btn"
+              onClick={() => setAmount(null)}
+            >
+              Clear
+            </Button>
+          )}
+        </div>
+
+        <Button block variant="success" size="lg" className="mt-3" onClick={submit}>
           Initialise
         </Button>
 

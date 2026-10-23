@@ -17,14 +17,23 @@ const Bank: React.FC<IBankProps> = ({
   proposeTransaction
 }) => {
   return (
-    <div className="bank">
+    <div className="bank pb-4">
       {!hasATransactionBeenMade && (
         <div className="mb-3">
           <InitialiseGame players={players} proposeTransaction={proposeTransaction} />
         </div>
       )}
 
-      <div className="mb-4">
+      <div className="card p-3 mb-3">
+        <PlayerPassedGo
+          players={players}
+          onSubmit={(value: number, playerId: string) =>
+            proposeTransaction("bank", playerId, value)
+          }
+        />
+      </div>
+
+      <div className="card p-3 mb-3">
         <ValuePlayerForm
           label="Give Money To Player"
           submitText="Send"
@@ -35,16 +44,7 @@ const Bank: React.FC<IBankProps> = ({
         />
       </div>
 
-      <div className="mb-4">
-        <PlayerPassedGo
-          players={players}
-          onSubmit={(value: number, playerId: string) =>
-            proposeTransaction("bank", playerId, value)
-          }
-        />
-      </div>
-
-      <div className="mb-4">
+      <div className="card p-3 mb-3">
         <ValuePlayerForm
           label="Take Money From Player"
           submitText="Take"

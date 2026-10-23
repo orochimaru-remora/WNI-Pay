@@ -2,6 +2,7 @@ import { IGameStatePlayer } from "@monopoly-money/game-state";
 import React, { useState } from "react";
 import { Button, ButtonGroup, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import MonopolyAmountInput from "../../components/MonopolyAmountInput";
+import { formatCurrency } from "../../utils";
 
 interface IValuePlayerFormProps {
   label: string;
@@ -25,7 +26,7 @@ const ValuePlayerForm: React.FC<IValuePlayerFormProps> = ({
     if (amount === null) {
       setSubmitError("Please provide an amount");
     } else if (amount <= 0) {
-      setSubmitError("You must provide sum larger than $0");
+      setSubmitError("You must provide sum larger than Rp0");
     } else if (!Number.isInteger(amount)) {
       setSubmitError("The amount must be a whole number");
     } else if (selectedPlayer === null) {
@@ -40,13 +41,37 @@ const ValuePlayerForm: React.FC<IValuePlayerFormProps> = ({
 
   return (
     <>
-      <label htmlFor={identifier} className="mb-1">
+      <label htmlFor={identifier} className="mb-2 font-weight-bold">
         {label}
       </label>
 
       <MonopolyAmountInput amount={amount} setAmount={setAmount} id={identifier} />
 
-      <ButtonGroup className="mt-1 player-and-submit-group">
+      <div className="quick-amount-group mt-2">
+        {[100000, 500000, 1000000, 2000000, 4000000].map((quickVal) => (
+          <Button
+            key={quickVal}
+            variant="outline-secondary"
+            size="sm"
+            className="quick-chip-btn"
+            onClick={() => setAmount((amount ?? 0) + quickVal)}
+          >
+            +{formatCurrency(quickVal)}
+          </Button>
+        ))}
+        {amount !== null && amount > 0 && (
+          <Button
+            variant="outline-danger"
+            size="sm"
+            className="quick-chip-btn"
+            onClick={() => setAmount(null)}
+          >
+            Clear
+          </Button>
+        )}
+      </div>
+
+      <div className="mt-3 player-and-submit-group">
         <DropdownButton
           as={ButtonGroup}
           variant="outline-secondary"
@@ -60,10 +85,10 @@ const ValuePlayerForm: React.FC<IValuePlayerFormProps> = ({
           ))}
         </DropdownButton>
 
-        <Button variant="outline-secondary" onClick={submit}>
+        <Button variant={submitText === "Take" ? "danger" : "success"} onClick={submit}>
           {submitText}
         </Button>
-      </ButtonGroup>
+      </div>
 
       <Form.Text style={{ color: "var(--danger)" }}>{submitError}</Form.Text>
     </>

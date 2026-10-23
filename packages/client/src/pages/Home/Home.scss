@@ -1,26 +1,51 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 .home {
+  .hero-section {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
   .banner {
     max-width: 80%;
     margin: auto;
     display: block;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
   }
 
   .new-join-button-wrapper {
     display: grid;
-    grid-gap: 10px;
+    gap: 12px;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .active-games-section {
+    max-width: 680px;
+    margin-inline: auto;
   }
 
   .active-game-cards {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
 
-    @media (min-width: map-get($grid-breakpoints, md)) {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
+  .player-badges-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-wrap: balance;
+    gap: 6px;
+  }
+
+  .player-badge {
+    font-size: 0.82rem;
+    padding: 0.35em 0.65em;
+    border-radius: 999px;
+  }
+
+  .empty-games-state {
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    font-weight: 500;
   }
 }

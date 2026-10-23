@@ -1,18 +1,35 @@
 .funds {
+  max-width: 680px;
+  margin-inline: auto;
+
   .balance-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 0.25rem;
-
-    .connected-state-dot {
-      position: absolute;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.65rem;
   }
 }
 
 .player-card {
-  .card-body {
-    padding-top: 1.6rem !important;
-    padding-bottom: 1.6rem !important;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  .send-pill-btn {
+    background-color: #f1f3f5;
+    color: #212529;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
   }
 }

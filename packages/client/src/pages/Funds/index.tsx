@@ -62,18 +62,32 @@ const Funds: React.FC<IFundsProps> = ({
   const isBanker = me?.banker ?? false;
 
   return (
-    <div className="funds">
+    <div className="funds pb-4">
       {isGameOpen && <GameCode gameId={gameId} isBanker={isBanker} />}
 
-      <Card className="mb-1 text-center">
+      <Card className="my-balance-card mb-3 text-center">
         {me !== undefined && (
           <Card.Body className="p-3">
-            {me.name}: {formatCurrency(me.balance)}
+            <div className="text-muted" style={{ fontSize: "0.82rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+              {me.name}'s Balance
+            </div>
+            <div style={{ fontSize: "1.85rem", fontWeight: 800, lineHeight: 1.2 }} className="mt-1">
+              {formatCurrency(me.balance)}
+            </div>
           </Card.Body>
         )}
       </Card>
 
-      <div className="mb-1 balance-grid">
+      <div className="mb-2">
+        <PlayerCard
+          name={bankName}
+          connected={null}
+          balance={Number.POSITIVE_INFINITY}
+          onClick={() => setRecipient("bank")}
+        />
+      </div>
+
+      <div className="balance-grid">
         {sortPlayersByName(players.filter((p) => p.playerId !== playerId)).map((player) => (
           <PlayerCard
             key={player.playerId}
@@ -85,16 +99,7 @@ const Funds: React.FC<IFundsProps> = ({
         ))}
       </div>
 
-      <div className="balance-grid">
-        <PlayerCard
-          name={bankName}
-          connected={null}
-          balance={Number.POSITIVE_INFINITY}
-          onClick={() => setRecipient("bank")}
-        />
-      </div>
-
-      <div className="mt-2">
+      <div className="mt-3">
         <RecentTransactions events={events} players={players} />
       </div>
     </div>

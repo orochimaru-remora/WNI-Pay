@@ -97,15 +97,21 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
 
   return (
     <>
-      <label htmlFor="player-passed-go" className="mb-1">
-        Player's Salary ({formatCurrency(passingGoReward)})
-      </label>
-
-      <ButtonGroup className="mt-1 settings-and-player-and-submit-group">
-        <Button variant="outline-secondary" onClick={showUpdatePassingGoRewardModal}>
-          ⚙️
+      <div className="d-flex align-items-center justify-content-between mb-2">
+        <label htmlFor="player-passed-go" className="mb-0 font-weight-bold">
+          Player's Salary ({formatCurrency(passingGoReward)})
+        </label>
+        <Button
+          variant="outline-secondary"
+          size="sm"
+          onClick={showUpdatePassingGoRewardModal}
+          title="Edit Salary Amount"
+        >
+          ⚙️ Edit
         </Button>
+      </div>
 
+      <div className="mt-1 player-and-submit-group">
         <DropdownButton
           as={ButtonGroup}
           variant="outline-secondary"
@@ -119,10 +125,10 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
           ))}
         </DropdownButton>
 
-        <Button variant="outline-secondary" onClick={submit}>
+        <Button variant="success" onClick={submit}>
           Give
         </Button>
-      </ButtonGroup>
+      </div>
 
       <Form.Text style={{ color: "var(--danger)" }}>{submitError}</Form.Text>
     </>

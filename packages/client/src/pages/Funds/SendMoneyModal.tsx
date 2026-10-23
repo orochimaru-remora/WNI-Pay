@@ -69,30 +69,55 @@ const SendMoneyModal: React.FC<ISendMoneyModalProps> = ({
         <Modal.Title>Transfer Funds</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="text-center">💵 → {getRecipientName()}</p>
+        <div className="text-center mb-3">
+          <span
+            className="d-inline-block px-3 py-1"
+            style={{
+              backgroundColor: "#f8f9fa",
+              borderRadius: "999px",
+              fontWeight: 600,
+              border: "1px solid rgba(0,0,0,0.08)"
+            }}
+          >
+            💵 → {getRecipientName()}
+          </span>
+        </div>
 
         <MonopolyAmountInput amount={amount} setAmount={setAmount} autoFocus={true} />
 
-        <div className="d-flex flex-wrap justify-content-between mt-2" style={{ gap: "4px" }}>
+        <div className="quick-amount-group mt-3">
           {[100000, 500000, 1000000, 2000000, 4000000].map((quickVal) => (
             <Button
               key={quickVal}
               variant="outline-secondary"
               size="sm"
-              className="flex-grow-1"
-              style={{ fontSize: "0.78rem", padding: "4px 6px" }}
+              className="quick-chip-btn"
               onClick={() => setAmount((amount ?? 0) + quickVal)}
             >
               +{formatCurrency(quickVal)}
             </Button>
           ))}
+          {amount !== null && amount > 0 && (
+            <Button
+              variant="outline-danger"
+              size="sm"
+              className="quick-chip-btn"
+              onClick={() => setAmount(null)}
+            >
+              Clear
+            </Button>
+          )}
         </div>
 
-        <Button block variant="success" className="mt-2" onClick={submit}>
+        <Button block variant="success" size="lg" className="mt-3" onClick={submit}>
           Send
         </Button>
 
-        <Form.Text style={{ color: "var(--danger)" }}>{submitError}</Form.Text>
+        {submitError && (
+          <Form.Text style={{ color: "var(--danger)" }} className="text-center mt-2">
+            {submitError}
+          </Form.Text>
+        )}
       </Modal.Body>
     </Modal>
   );

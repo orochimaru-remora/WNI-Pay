@@ -1,5 +1,6 @@
+import { navigate } from "hookrouter";
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { createGame, joinGame } from "../../api";
 import Config from "../../config";
@@ -84,61 +85,80 @@ const Join: React.FC<IJoinProps> = ({ newGame, onGameSetup }) => {
   };
 
   return (
-    <div className="text-center">
-      <h1>{title}</h1>
+    <div style={{ maxWidth: "440px", margin: "1.5rem auto" }}>
+      <Card className="p-4 text-center">
+        <h2 className="mb-3">{title}</h2>
 
-      {!newGame && (
-        <Form.Group>
-          <Form.Label>Game Id</Form.Label>
-          <NumberFormat
-            allowNegative={false}
-            format="######"
-            placeholder="123456"
-            value={gameId}
-            onValueChange={({ value }: NumberFormatValues) => setGameId(value)}
-            className="form-control text-center"
-            autoComplete="off"
-            inputMode="decimal"
-          />
-          <Form.Text style={{ color: "var(--danger)" }}>{gameError}</Form.Text>
-        </Form.Group>
-      )}
+        {!newGame && (
+          <Form.Group className="text-left">
+            <Form.Label className="font-weight-bold">Game ID</Form.Label>
+            <NumberFormat
+              allowNegative={false}
+              format="######"
+              placeholder="123456"
+              value={gameId}
+              onValueChange={({ value }: NumberFormatValues) => setGameId(value)}
+              className="form-control text-center"
+              style={{ fontSize: "1.15rem", letterSpacing: "0.1em" }}
+              autoComplete="off"
+              inputMode="decimal"
+            />
+            {gameError && (
+              <Form.Text style={{ color: "var(--danger)" }} className="mt-1">
+                {gameError}
+              </Form.Text>
+            )}
+          </Form.Group>
+        )}
 
-      {isAStoredGame ? (
-        <p>
-          <em>You're already in this game - name is not required.</em>
-        </p>
-      ) : (
-        <Form.Group>
-          <Form.Label>Your Name</Form.Label>
-          <Form.Control
-            placeholder="Name"
-            value={name}
-            className="text-center"
-            onChange={(e) => setName(e.currentTarget.value)}
-            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
-              event.key === "Enter" && onSubmit()
-            }
-            autoComplete="on"
-          />
-          <Form.Text style={{ color: "var(--danger)" }}>{nameError}</Form.Text>
-        </Form.Group>
-      )}
+        {isAStoredGame ? (
+          <p className="my-3">
+            <em>You're already in this game - name is not required.</em>
+          </p>
+        ) : (
+          <Form.Group className="text-left">
+            <Form.Label className="font-weight-bold">Your Name</Form.Label>
+            <Form.Control
+              placeholder="Enter your name"
+              value={name}
+              className="text-center"
+              onChange={(e) => setName(e.currentTarget.value)}
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                event.key === "Enter" && onSubmit()
+              }
+              autoComplete="on"
+            />
+            {nameError && (
+              <Form.Text style={{ color: "var(--danger)" }} className="mt-1">
+                {nameError}
+              </Form.Text>
+            )}
+          </Form.Group>
+        )}
 
-      <Button block variant="primary" onClick={onSubmit} disabled={loading}>
-        {newGame ? "Create" : "Join"}
-      </Button>
+        <div
+          className="mt-4"
+          style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "0.65rem" }}
+        >
+          <Button variant="outline-secondary" onClick={() => navigate("/")} disabled={loading}>
+            ← Back
+          </Button>
+          <Button variant="primary" onClick={onSubmit} disabled={loading}>
+            {newGame ? "Create Game →" : "Join Game →"}
+          </Button>
+        </div>
 
-      {hasServerError && (
-        <p style={{ color: "var(--danger)" }} className="mt-2">
-          {Config.api.unreachableErrorMessage.split("\n").map((line, i, arr) => (
-            <React.Fragment key={line}>
-              {line}
-              {i !== arr.length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </p>
-      )}
+        {hasServerError && (
+          <p style={{ color: "var(--danger)" }} className="mt-3 mb-0">
+            {Config.api.unreachableErrorMessage.split("\n").map((line, i, arr) => (
+              <React.Fragment key={line}>
+                {line}
+                {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </p>
+        )}
+      </Card>
     </div>
   );
 };

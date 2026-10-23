@@ -1,9 +1,19 @@
 .settings {
+  max-width: 680px;
+  margin-inline: auto;
+
   .connected-state-dot {
     margin: auto;
   }
 
   .player-row td {
     vertical-align: middle;
+    padding: 0.55rem 0.5rem;
+  }
+
+  .settings-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.65rem;
   }
 }

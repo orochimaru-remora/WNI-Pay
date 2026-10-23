@@ -1,11 +1,14 @@
 .bank {
+  max-width: 640px;
+  margin-inline: auto;
+
   .player-and-submit-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
+    gap: 0.6rem;
 
-  .settings-and-player-and-submit-group {
-    display: grid;
-    grid-template-columns: auto 1fr 1fr;
+    .dropdown-toggle {
+      width: 100%;
+    }
   }
 }

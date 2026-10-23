@@ -1,10 +1,23 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 .navigation {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+
+  .nav-button-group {
+    display: flex;
+    align-items: safe center;
+    gap: 0.45rem;
+    margin-inline-start: auto;
+  }
+
   .icon-button {
+    border-radius: 10px !important;
+    padding: 0.45rem 0.85rem !important;
+
     @media (max-width: map-get($grid-breakpoints, sm)) {
-      padding-left: ($spacer * 0.5) !important;
-      padding-right: ($spacer * 0.5) !important;
+      padding: 0.45rem 0.65rem !important;
     }
   }
 }
