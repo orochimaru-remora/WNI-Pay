@@ -27,7 +27,7 @@ const SendMoneyModal: React.FC<ISendMoneyModalProps> = ({
     if (amount === null) {
       setSubmitError("Please provide an amount");
     } else if (amount <= 0) {
-      setSubmitError("You must provide sum larger than $0");
+      setSubmitError("You must provide sum larger than Rp0");
     } else if (!Number.isInteger(amount)) {
       setSubmitError("The amount must be a whole number");
     } else if (amount > balance) {
@@ -73,7 +73,22 @@ const SendMoneyModal: React.FC<ISendMoneyModalProps> = ({
 
         <MonopolyAmountInput amount={amount} setAmount={setAmount} autoFocus={true} />
 
-        <Button block variant="success" className="mt-1" onClick={submit}>
+        <div className="d-flex flex-wrap justify-content-between mt-2" style={{ gap: "4px" }}>
+          {[100000, 500000, 1000000, 2000000, 4000000].map((quickVal) => (
+            <Button
+              key={quickVal}
+              variant="outline-secondary"
+              size="sm"
+              className="flex-grow-1"
+              style={{ fontSize: "0.78rem", padding: "4px 6px" }}
+              onClick={() => setAmount((amount ?? 0) + quickVal)}
+            >
+              +{formatCurrency(quickVal)}
+            </Button>
+          ))}
+        </div>
+
+        <Button block variant="success" className="mt-2" onClick={submit}>
           Send
         </Button>
 

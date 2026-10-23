@@ -1,7 +1,7 @@
 import { IGameStatePlayer } from "@monopoly-money/game-state";
 import { routePaths } from "./constants";
 
-export const formatCurrency = (value: number) => `$${value.toLocaleString()}`;
+export const formatCurrency = (value: number) => `Rp${value.toLocaleString("id-ID")}`;
 
 export const sortPlayersByName = (players: IGameStatePlayer[]) =>
   players.slice().sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));

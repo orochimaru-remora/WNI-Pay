@@ -59,8 +59,9 @@ const MonopolyAmountInput: React.FC<IMonopolyAmountInputProps> = ({
 
       <NumberFormat
         allowNegative={false}
-        thousandSeparator={true}
-        prefix="$"
+        thousandSeparator="."
+        decimalSeparator=","
+        prefix="Rp"
         id={id}
         value={inputValue}
         onValueChange={({ value }: NumberFormatValues) => setInputValue(value)}

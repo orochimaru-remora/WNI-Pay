@@ -50,8 +50,9 @@ const PlayerPassedGo: React.FC<IPlayerPassedGoProps> = ({ players, onSubmit }) =
             </InputGroup.Prepend>
             <NumberFormat
               allowNegative={false}
-              thousandSeparator={true}
-              prefix="$"
+              thousandSeparator="."
+              decimalSeparator=","
+              prefix="Rp"
               value={updatePassingGoRewardModalValue}
               onValueChange={({ value }: NumberFormatValues) => {
                 setUpdatePassingGoRewardModalValue(parseInt(value, 10));
