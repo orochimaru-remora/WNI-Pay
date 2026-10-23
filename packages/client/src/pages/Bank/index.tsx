@@ -1,23 +1,18 @@
 import { GameEntity, IGameStatePlayer } from "@monopoly-money/game-state";
 import React from "react";
 import "./Bank.scss";
-import GiveFreeParking from "./GiveFreeParking";
 import InitialiseGame from "./InitialiseGame";
 import PlayerPassedGo from "./PlayerPassedGo";
 import ValuePlayerForm from "./ValuePlayerForm";
 
 interface IBankProps {
   players: IGameStatePlayer[];
-  useFreeParking: boolean;
-  freeParkingBalance: number;
   hasATransactionBeenMade: boolean;
   proposeTransaction: (from: GameEntity, to: GameEntity, amount: number) => void;
 }
 
 const Bank: React.FC<IBankProps> = ({
   players,
-  useFreeParking,
-  freeParkingBalance,
   hasATransactionBeenMade,
   proposeTransaction
 }) => {
@@ -48,18 +43,6 @@ const Bank: React.FC<IBankProps> = ({
           }
         />
       </div>
-
-      {useFreeParking && (
-        <div className="mb-4">
-          <GiveFreeParking
-            players={players}
-            freeParkingBalance={freeParkingBalance}
-            onSubmit={(playerId: string) =>
-              proposeTransaction("freeParking", playerId, freeParkingBalance)
-            }
-          />
-        </div>
-      )}
 
       <div className="mb-4">
         <ValuePlayerForm

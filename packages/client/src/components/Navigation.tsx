@@ -5,7 +5,6 @@ import { routePaths } from "../constants";
 import BankIcon from "../img/bank.svg?react";
 import BannerImage from "../img/banner.png";
 import FundsIcon from "../img/funds.svg?react";
-import HelpIcon from "../img/help.svg?react";
 import ListIcon from "../img/list.svg?react";
 import SettingsIcon from "../img/settings.svg?react";
 import "./Navigation.scss";
@@ -49,12 +48,6 @@ const Navigation: React.FC<INavigationProps> = ({ inGame, isBanker }) => {
       active: inGame && isBanker,
       title: "Settings",
       icon: SettingsIcon
-    },
-    {
-      path: routePaths.help,
-      active: true,
-      title: "Help",
-      icon: HelpIcon
     }
   ];
 

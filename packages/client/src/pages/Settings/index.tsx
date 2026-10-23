@@ -6,8 +6,6 @@ import ConnectedStateDot from "../../components/ConnectedStateDot";
 import {
   formatCurrency,
   sortPlayersByName,
-  trackFreeParkingDisabled,
-  trackFreeParkingEnabled,
   trackNewPlayersAllowed,
   trackNewPlayersNotAllowed,
   trackShowOppositionBalancesDisabled,
@@ -20,26 +18,22 @@ import "./Settings.scss";
 
 interface ISettingsProps {
   isGameOpen: boolean;
-  useFreeParking: boolean;
   showOppositionBalances: boolean;
   players: IGameStatePlayer[];
   proposePlayerNameChange: (playerId: string, name: string) => void;
   proposePlayerDelete: (playerId: string) => void;
   proposeGameOpenStateChange: (open: boolean) => void;
-  proposeUseFreeParkingChange: (useFreeParking: boolean) => void;
   proposeShowOppositionBalancesChange: (showOppositionBalances: boolean) => void;
   proposeGameEnd: () => void;
 }
 
 const Settings: React.FC<ISettingsProps> = ({
   isGameOpen,
-  useFreeParking,
   showOppositionBalances,
   players,
   proposePlayerNameChange,
   proposePlayerDelete,
   proposeGameOpenStateChange,
-  proposeUseFreeParkingChange,
   proposeShowOppositionBalancesChange,
   proposeGameEnd
 }) => {
@@ -88,15 +82,6 @@ const Settings: React.FC<ISettingsProps> = ({
       trackShowOppositionBalancesEnabled();
     }
     proposeShowOppositionBalancesChange(!showOppositionBalances);
-  };
-
-  const toggleFreeParking = () => {
-    if (useFreeParking) {
-      trackFreeParkingDisabled();
-    } else {
-      trackFreeParkingEnabled();
-    }
-    proposeUseFreeParkingChange(!useFreeParking);
   };
 
   const toggleNewPlayersAllowed = () => {
@@ -165,10 +150,6 @@ const Settings: React.FC<ISettingsProps> = ({
         {showOppositionBalances ? "Hide" : "Show"} opposition balances
       </Button>
 
-      <Button block variant="info" onClick={toggleFreeParking}>
-        {useFreeParking ? "Disable" : "Enable"} the Free Parking House Rule
-      </Button>
-
       <Button block variant="primary" onClick={toggleNewPlayersAllowed}>
         {isGameOpen ? "Close" : "Open"} Game To New Players
       </Button>
@@ -176,17 +157,6 @@ const Settings: React.FC<ISettingsProps> = ({
       <Button block variant="danger" onClick={() => showEndGameConfirmModal()}>
         End Game
       </Button>
-
-      <div className="mt-5 text-center">
-        <div>
-          <small>Find this app helpful?</small>
-        </div>
-        <a href="https://www.buymeacoffee.com/brentvollebregt" target="_blank">
-          <Button block variant="warning">
-            🍺 Buy a beer to say thanks 🍺
-          </Button>
-        </a>
-      </div>
     </div>
   );
 };

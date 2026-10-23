@@ -31,7 +31,7 @@ const Help: React.FC = () => {
         will have this) and your name. Press "Join" when you have filled out all the fields.
       </p>
 
-      <h5>Transferring Funds to Other Players, Free Parking and the Bank</h5>
+      <h5>Transferring Funds to Other Players and the Bank</h5>
       <p>
         To transfer funds to another person/entity, click the tile associated with the target
         player/entity on the funds page. A dialog should appear which will allow you to input an
@@ -88,12 +88,6 @@ const Help: React.FC = () => {
       <p>
         To change the amount given to a player, press the settings button to the right, input a new
         amount and press "Set".
-      </p>
-
-      <h5>Giving Free Parking to a Player</h5>
-      <p>
-        To give free parking to a player, select the player in the dropdown under the "Give Free
-        Parking" label and press "Give" to complete the transaction.
       </p>
 
       <h5>Changing a Player's Name</h5>

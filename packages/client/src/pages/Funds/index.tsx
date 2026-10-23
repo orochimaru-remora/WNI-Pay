@@ -2,7 +2,7 @@ import { GameEntity, GameEvent, IGameStatePlayer } from "@monopoly-money/game-st
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useModal } from "react-modal-hook";
-import { bankName, freeParkingName } from "../../constants";
+import { bankName } from "../../constants";
 import { formatCurrency, sortPlayersByName } from "../../utils";
 import "./Funds.scss";
 import GameCode from "./GameCode";
@@ -15,9 +15,7 @@ interface IFundsProps {
   playerId: string;
   isGameOpen: boolean;
   players: IGameStatePlayer[];
-  useFreeParking: boolean;
   showOppositionBalances: boolean;
-  freeParkingBalance: number;
   proposeTransaction: (from: GameEntity, to: GameEntity, amount: number) => void;
   events: GameEvent[];
 }
@@ -27,8 +25,6 @@ const Funds: React.FC<IFundsProps> = ({
   playerId,
   isGameOpen,
   players,
-  useFreeParking,
-  freeParkingBalance,
   showOppositionBalances,
   proposeTransaction,
   events
@@ -90,14 +86,6 @@ const Funds: React.FC<IFundsProps> = ({
       </div>
 
       <div className="balance-grid">
-        {useFreeParking && (
-          <PlayerCard
-            name={freeParkingName}
-            connected={null}
-            balance={freeParkingBalance}
-            onClick={() => setRecipient("freeParking")}
-          />
-        )}
         <PlayerCard
           name={bankName}
           connected={null}
