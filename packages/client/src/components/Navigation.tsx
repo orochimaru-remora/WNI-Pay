@@ -1,5 +1,5 @@
 import { navigate, usePath } from "hookrouter";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { routePaths } from "../constants";
 import BankIcon from "../img/bank.svg?react";
@@ -7,6 +7,7 @@ import BannerImage from "../img/logo.jpg";
 import FundsIcon from "../img/funds.svg?react";
 import ListIcon from "../img/list.svg?react";
 import SettingsIcon from "../img/settings.svg?react";
+import { soundManager } from "../utils/sound";
 import "./Navigation.scss";
 
 interface INavigationProps {
@@ -23,6 +24,12 @@ interface INavbarLink {
 
 const Navigation: React.FC<INavigationProps> = ({ inGame, isBanker }) => {
   const currentPath = usePath();
+  const [soundEnabled, setSoundEnabled] = useState(soundManager.isEnabled());
+
+  const toggleSound = () => {
+    const updated = soundManager.toggleSound();
+    setSoundEnabled(updated);
+  };
 
   const navbarLinks: INavbarLink[] = [
     {
@@ -97,6 +104,14 @@ const Navigation: React.FC<INavigationProps> = ({ inGame, isBanker }) => {
                 </Nav.Link>
               );
             })}
+          <Button
+            variant="light"
+            title={soundEnabled ? "Mute sound effects" : "Unmute sound effects"}
+            className="icon-button ml-1 d-flex align-items-center"
+            onClick={toggleSound}
+          >
+            <span style={{ fontSize: "16px", lineHeight: "1" }}>{soundEnabled ? "🔊" : "🔇"}</span>
+          </Button>
         </Nav>
       </Container>
     </Navbar>

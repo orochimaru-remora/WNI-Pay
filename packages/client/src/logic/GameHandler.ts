@@ -20,6 +20,7 @@ import {
 } from "@monopoly-money/server/build/api/dto";
 import config from "../config";
 import { trackUnexpectedServerDisconnection } from "../utils";
+import { soundManager } from "../utils/sound";
 
 export interface IGameHandlerState {
   events: GameEvent[];
@@ -227,6 +228,10 @@ class GameHandler {
     } else if (incomingMessage.type === "newEvent") {
       this.events.push(incomingMessage.event);
       this.gameState = calculateGameState([incomingMessage.event], this.gameState);
+
+      if (incomingMessage.event.type === "transaction") {
+        soundManager.playTransactionSound();
+      }
     } else if (incomingMessage.type === "gameEnd") {
       this.gameEnd("end");
     }
